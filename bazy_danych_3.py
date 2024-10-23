@@ -59,10 +59,10 @@ def add_training(conn, training):
   :param training: 
   :return: training id
   """
-  sql = ''' INSERT INTO trainings(id, body_part, start_date, end_date)
-              VALUES(?, ?, ?, ?) '''
+  sql = ''' INSERT INTO trainings(body_part, start_date, end_date)
+              VALUES(?, ?, ?) '''
   cur = conn.cursor()
-  cur.executemany(sql, training)
+  cur.execute(sql, training)
   conn.commit()
   return cur.lastrowid
 def add_exercises(conn, exercise):
@@ -72,10 +72,10 @@ def add_exercises(conn, exercise):
   :param exercise: 
   :return: exercise id
   """
-  sql = ''' INSERT INTO exercises(id, training_id, name, number_of_series, number_of_rep, status, start_date, end_date)
-              VALUES(?, ?, ?, ?, ?, ?, ?, ?) '''
+  sql = ''' INSERT INTO exercises(training_id, name, number_of_series, number_of_rep, status, start_date, end_date)
+              VALUES(?, ?, ?, ?, ?, ?, ?) '''
   cur = conn.cursor()
-  cur.executemany(sql, exercise)
+  cur.execute(sql, exercise)
   conn.commit()
   return cur.lastrowid
 if __name__ == "__main__":
@@ -90,5 +90,5 @@ if __name__ == "__main__":
    
     exercise_id = add_exercises(conn, exercise)
     
-    print(tr_id, execute_id)
+    print(tr_id, exercise_id)
     conn.close()
